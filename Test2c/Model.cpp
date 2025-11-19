@@ -43,7 +43,24 @@ Model::Model(const Model &mod)
 Model::~Model()
 {
     cout << ">>> Model = Destructeur par defaut <<<" << endl;
-    if (name) delete[] name; // Libère la mémoire si elle a été allouée
+    if (name)
+        delete [] name;
+    name = NULL;
+}
+
+// ----------- OPERTEUR D'AFFECTATION -----------/
+
+Model& Model::operator=(const Model& other)
+{
+    if(this == &other) return *this;
+
+    //Utiliser SetName pour liberation préalable si nécessaire
+    setName(other.getName());
+    power = other.getPower();
+    engine = other.getEngine();
+    basePrice = other.getBasePrice();
+
+    return *this;
 }
 
 /* ------------------SETTER------------------------ */
@@ -51,9 +68,12 @@ Model::~Model()
 // Définit un nouveau nom
 void Model::setName(const char*n)
 {
-    if(n == NULL) return;                // Si paramètre vide -> rien à faire
-    if(name == n) return;                // Si c’est la même adresse -> rien à faire
-    if(name) delete [] name;             // Libère l’ancien nom si déjà alloué
+    if(!n) return;            // Libère l’ancien nom si déjà alloué
+    
+    if(name){
+        delete[] name;
+        name = NULL;
+    }
     name = new char[strlen(n)+1];        // Alloue un tableau de char (+1 pour '\0')
     strcpy(name,n);                      // Copie la chaîne
 }
