@@ -41,6 +41,8 @@ Car::Car(const Car &c) {
 	//passage en ref de l'objet c const pour eviter une copie inutile
 	name = c.name;
 	model = c.model; //La copie automatique est safe car string
+
+	/// CORRIGER ICI, Pointeur aussi doit être liberé / Faire cas par cas sans modifier le delete du destructeur
 	/*for(int i=0;i<5;i++)
 	{
 		if(c.options[i])

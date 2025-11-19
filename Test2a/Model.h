@@ -28,6 +28,8 @@ public:                    // Partie publique : accessible à l’extérieur de 
     Model(const Model &mod); // Constructeur de copie (permet de dupliquer un objet)
     ~Model();              // Destructeur (libère la mémoire quand l’objet est détruit)
 
+    Model& operator=(const Model& other);
+
     // Setters : méthodes pour modifier les attributs privés
     void setName(const char* n);  // Modifier le nom
     void setPower(int p);         // Modifier la puissance
