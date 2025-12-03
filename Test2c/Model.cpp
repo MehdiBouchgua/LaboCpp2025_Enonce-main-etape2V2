@@ -143,7 +143,7 @@ void Model :: display() const
     case Engine::Petrol:   cout << "essence, ";    break;
     case Engine::Diesel:   cout << "diesel, ";     break;
     case Engine::Electric: cout << "electrique, "; break;
-    case Engine::Hybride:  cout << "hybride, ";    break;
+    case Engine::Hybrid:  cout << "hybrid, ";    break;
     }
 
     cout << basePrice << " euros)" << endl; // Affiche le prix
