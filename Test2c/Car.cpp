@@ -6,15 +6,14 @@
 #include <iostream>
 
 using namespace std;
-using namespace carconfig;
+namespace carconfig{
 
 // Constructeur par défaut
 
 Car::Car() {
 	cout << ">>> Car = constructeur par defaut" << endl;
 	name = "Projet_sans_nom"; //
-	Model mod; //model par defaut
-	setModel(mod); // assignation de ce modele a la voiture a l'aide du setter
+	setModel(model); // assignation de ce modele a la voiture a l'aide du setter
 	for(int i=0;i<5;i++)
 	{
 		options[i] = nullptr;
@@ -39,8 +38,9 @@ Car::Car(const string &n,const Model &mod) {
 Car::Car(const Car &c) {
 	cout << ">>> Car : Constructeur de copie <<<" << endl;
 	//passage en ref de l'objet c const pour eviter une copie inutile
-	name = c.name;
-	model = c.model; //La copie automatique est safe car string
+	setName(c.getName());
+	setModel(c.getModel()); //La copie automatique est safe car string
+
 	for(int i=0;i<5;i++)
 	{
 		if(c.options[i])
@@ -63,8 +63,12 @@ Car::~Car()
 	// Rien a désallouer car pas de pointeur ni de mémoire dynamique -> destructeur de "Model" appelé auto
 	for(int i=0;i<5;i++)
 	{
-		delete options[i];
-		options[i] = nullptr;
+		if(options[i] != nullptr)
+		{
+			delete options[i];
+			options[i] = nullptr;
+		}
+		
 	}
 }
 
@@ -159,4 +163,5 @@ void Car::display() const
 		cout << "Aucune option" << endl;
 	}
 	cout << "Prix total : " << getPrice() << " € " << endl;
+}
 }

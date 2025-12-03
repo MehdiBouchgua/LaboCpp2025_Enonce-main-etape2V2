@@ -56,9 +56,9 @@ Model& Model::operator=(const Model& other)
 
     //Utiliser SetName pour liberation préalable si nécessaire
     setName(other.getName());
-    power = other.getPower();
-    engine = other.getEngine();
-    basePrice = other.getBasePrice();
+    setPower(other.getPower());
+    setEngine(other.getEngine());
+    setBasePrice(other.getBasePrice());
 
     return *this;
 }
